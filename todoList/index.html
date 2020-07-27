@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <header class="head">
+            <div class="container">
+                <div class="logo">toDoList</div>
+                <div class="search">
+                    <input type="search" @keyup.enter="renderDoing" @input="handleInput" :value="markValue">
+                    <button @click="renderDoing">添加</button>
+                </div>
+            </div>
+        </header>
+        <div class="container">
+            <h2>
+                <span>正在进行</span>
+                <span class="mask-num">{{doingList.length}}</span>
+            </h2>
+            <ul class="mask-list">
+                <li v-for="(item,index) in doingList">
+                    <div>
+                        <input type="checkbox" @change.prevent="checkboxDoing(index)">
+                        <span>{{item}}</span>
+                    </div>
+                    <button @click="deleteDoing(index)">删除</button>
+                </li>
+            </ul>
+        </div>
+        <div class="container">
+            <h2>
+                <span>已经完成</span>
+                <span class="mask-num">{{didList.length}}</span>
+            </h2>
+            <ul class="mask-list complete-list">
+                <li v-for="(item,index) in didList">
+                    <div>
+                        <input type="checkbox" @change.prevent="checkboxDid(index)">
+                        <span>{{item}}</span>
+                    </div>
+                    <button @click="deleteDid(index)">删除</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+<script>
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            doingList: [],
+            didList: [],
+            markValue: ''
+        },
+        methods: {
+            handleInput(e) {
+                this.markValue = e.target.value;
+            },
+            renderDoing(e) {
+                if (this.markValue === '') {
+                    return
+                };
+                this.doingList.push(this.markValue);
+                this.markValue = '';
+            },
+            deleteDoing(index) {
+                this.doingList.splice(index, 1);
+            },
+            deleteDid(index) {
+                this.didList.splice(index, 1);
+            },
+            checkboxDoing(index) {
+                this.didList.push(this.doingList[index]);
+                this.deleteDoing(index);
+            },
+            checkboxDid(index) {
+                this.doingList.push(this.didList[index]);
+                this.deleteDid(index);
+            }
+
+        }
+    })
+</script>
+
+</html>

@@ -1,0 +1,87 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+h2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+h2 .mask-num {
+    height: 20px;
+    padding: 0 5px;
+    border-radius: 20px;
+    background-color: #e6e6fa;
+    color: #666;
+    font-size: 14px;
+}
+
+body {
+    background-color: #cdcdcd;
+}
+
+.container {
+    width: 600px;
+    margin: 0 auto;
+    padding: 0 10px;
+}
+
+#app .head {
+    height: 50px;
+    background-color: #333;
+}
+
+#app .head .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#app .head .container .logo {
+    width: 100px;
+    line-height: 50px;
+    color: #ddd;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+#app .head .container .search {
+    width: 60%;
+}
+
+#app .head .container .search input {
+    width: 80%;
+    height: 24px;
+    text-indent: 10px;
+    border-radius: 5px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.24), 0 1px 6px rgba(0, 0, 0, 0.45) inset;
+    border: none;
+    outline: none;
+}
+
+#app .head .container .search button {
+    width: 15%;
+    height: 24px;
+}
+
+.mask-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 32px;
+    line-height: 32px;
+    margin-bottom: 10px;
+    padding: 0 15px;
+    border-radius: 3px;
+    border-left: 5px solid #629A9C;
+    background-color: #fff;
+}
+
+.mask-list.complete-list li {
+    border-left-color: #999;
+    opacity: .5;
+}

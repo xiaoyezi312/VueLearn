@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <input type="number" v-model.number.lazy="numOne">
+        <select v-model="counter">
+            <option value="+" selected>+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+        </select>
+        <input type="number" v-model.number.lazy="numTwo">
+        <button @click="handleCounter">=</button>
+        <span>{{answer}}</span>
+    </div>
+</body>
+<script>
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            answer: 0,
+            numOne: 0,
+            numTwo: 0,
+            counter: '+'
+        },
+        methods: {
+            handleCounter() {
+                const {
+                    numOne,
+                    numTwo,
+                    counter
+                } = this;
+                switch (counter) {
+                    case '+':
+                        this.answer = numOne + numTwo;
+                        break;
+                    case '-':
+                        this.answer = numOne - numTwo;
+                        break;
+                    case '*':
+                        this.answer = numOne * numTwo;
+                        break;
+                    case '/':
+                        this.answer = numOne / numTwo;
+                        break;
+                }
+
+            }
+        },
+    })
+</script>
+
+</html>

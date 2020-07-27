@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+    <script src="../vue.js"></script>
+    <script src="./vue-resource.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div class="username">
+            <input type="text" placeholder="用户名" v-model="name">
+        </div>
+        <div class="mail">
+            <input type="text" placeholder="邮箱" v-model="mail">
+        </div>
+        <div class="upload-btn" @click="handleUpload">上传</div>
+        <div class="test-btn" @click="handleTest">测试jsonp</div>
+        <div class="show-btn" @click="handleShow">显示人物信息</div>
+        <ul class="person-list" v-if="personList.length">
+            <li class="person" v-for="person in personList">
+                <span>{{ person.name }}</span>
+                <span>{{ person.mail }}</span>
+            </li>
+        </ul>
+    </div>
+
+</body>
+<script>
+    const vApp = new Vue({
+        el: '#app',
+        data: {
+            name: '',
+            mail: '',
+            msg: '',
+            personList: []
+        },
+        methods: {
+            handleUpload() {
+                this.$http.post('https://developer.duyiedu.com/vue/setUserInfo', {
+                    name: this.name,
+                    mail: this.mail
+                }).then(res => {
+                    this.msg = res.body.data;
+                }).catch(error => {
+                    this.msg = error.body.msg;
+                })
+            },
+            handleTest() {
+                this.$http.jsonp('https://developer.duyiedu.com/vue/jsonp').then(res => {
+                    console.log(res);
+                })
+            },
+            handleShow() {
+                this.$http.get('https://developer.duyiedu.com/vue/getUserInfo').then(res => {
+                    this.personList = res.body.msg;
+                })
+            }
+        },
+        watch: {
+            msg() {
+                if (this.msg == '') {
+                    return
+                }
+                alert(this.msg);
+                this.msg = '';
+            }
+        },
+    })
+</script>
+
+</html>
